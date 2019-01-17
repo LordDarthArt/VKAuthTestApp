@@ -8,7 +8,13 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        class="tk.lorddarthart.vkauthtestapp.FragmentAuth"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_auth" />
 
 </android.support.constraint.ConstraintLayout>

@@ -107,7 +107,7 @@ public class VKServiceActivity extends Activity implements DialogInterface.OnDis
      * @param scopeList authorization
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    static void startLoginActivity(@NonNull Fragment fr, ArrayList<String> scopeList) {
+    static void startLoginActivity(@NonNull android.support.v4.app.Fragment fr, ArrayList<String> scopeList) {
         Intent intent = createIntent(fr.getActivity().getApplication(), VKServiceType.Authorization);
         intent.putStringArrayListExtra(KEY_SCOPE_LIST, scopeList);
         fr.startActivityForResult(intent, VKServiceType.Authorization.getOuterCode());
