@@ -67,7 +67,7 @@ public class FragmentAuth extends Fragment {
                             arrayList.add(String.valueOf(list.get(i)));
                         }
                         Collections.sort(arrayList);
-                        for (int i = 0; i<list.size(); i++) {
+                        for (int i = 0; i<arrayList.size(); i++) {
                             if (i>=5) {
                                 arrayList.remove(i-deleted);
                                 deleted++;
