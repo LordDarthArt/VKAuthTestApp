@@ -15,10 +15,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fr1 = new FragmentAuth();
-        transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.mainFragment, fr1);
-        transaction.commit();
         if (VKSdk.isLoggedIn()) {
             fr1 = new FragmentFriendslist();
             transaction = getSupportFragmentManager().beginTransaction();
