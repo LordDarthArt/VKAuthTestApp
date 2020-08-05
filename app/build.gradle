@@ -1,32 +1,96 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    apply from: "../dependencies.gradle"
+
+    compileSdkVersion target_sdk_version
+    buildToolsVersion build_tools_version
+
     defaultConfig {
         applicationId "tk.lorddarthart.vkauthtestapp"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_build
+        versionName "$version_major.$version_minor.$version_patch"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled = true
+
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            versionNameSuffix "-dev"
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "vk_auth_test_app-v${versionName}-b${rootProject.version_build}.apk"
+        }
+    }
+    dexOptions {
+        // Prevent OutOfMemory with MultiDex during the build phase
+        javaMaxHeapSize "4g"
+    }
+    buildFeatures {
+        dataBinding = true
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation project(':vksdk_library')
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
+
+    // Base
+    implementation "androidx.legacy:legacy-support-v4:$legacy_version"
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Design
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.recyclerview:recyclerview:$recycler_version"
+
+    // Android Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:$android_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$android_lifecycle_version"
+
+    // Koin
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-core-ext:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-fragment:$koin_version"
+    implementation "org.koin:koin-androidx-ext:$koin_version"
+
+    // Navigation Component
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_component_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_component_version"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigation_component_version"
+
+    // Test
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    testImplementation "org.koin:koin-test:$koin_version"
+    androidTestImplementation "androidx.navigation:navigation-testing:$navigation_component_version"
 }
 repositories {
     mavenCentral()

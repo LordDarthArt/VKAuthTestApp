@@ -1,12 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 30
+    buildToolsVersion '30.0.1'
 
     defaultConfig {
         minSdkVersion 9
-        targetSdkVersion 28
+        targetSdkVersion 30
     }
 }
 
@@ -16,8 +18,14 @@ configurations {
 }
 
 dependencies {
-    javadocDeps 'com.android.support:support-annotations:25.1.0'
-    implementation 'com.android.support:support-v4:25.1.0'
+    javadocDeps 'androidx.annotation:annotation:1.1.0'
+
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.legacy_version"
+    implementation "androidx.core:core-ktx:$rootProject.core_ktx_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlin_version"
 }
 
 apply from: '../maven_push.gradle'
+repositories {
+    mavenCentral()
+}

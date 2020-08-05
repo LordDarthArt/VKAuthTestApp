@@ -1,11 +1,59 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 buildscript {
+    apply from: './dependencies.gradle'
+
+    def versionPatchAndNumber = 0
+
+    ext.getCurrentFlavor = { ->
+        Gradle gradle = getGradle()
+        String tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+
+        Pattern pattern
+
+        if (tskReqStr.contains("assemble"))
+            pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+        else
+            pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
+
+        Matcher matcher = pattern.matcher(tskReqStr)
+
+        if (matcher.find())
+            return matcher.group(1).toLowerCase()
+        else {
+            println "NO MATCH FOUND"
+            return ""
+        }
+    }
+
+    def versionPropsFile = file("app/version.properties")
+
+    Properties versionProps = new Properties()
+
+    versionProps.load(new FileInputStream(versionPropsFile))
+
+    ext.version_major = versionProps["VERSION_MAJOR"].toInteger()
+    ext.version_minor = versionProps["VERSION_MINOR"].toInteger()
+    ext.version_patch = versionProps["VERSION_PATCH"].toInteger() + versionPatchAndNumber
+    ext.version_build = versionProps["VERSION_BUILD"].toInteger() + 1
+    ext.version_number = versionProps["VERSION_NUMBER"].toInteger() + versionPatchAndNumber
+
+    versionProps["VERSION_PATCH"] = version_patch.toString()
+    versionProps["VERSION_BUILD"] = version_build.toString()
+    versionProps["VERSION_NUMBER"] = version_number.toString()
+
+    versionProps.store(versionPropsFile.newWriter(), null)
+
     repositories {
         google()
         jcenter()
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0'
+        classpath "com.android.tools.build:gradle:$gradle_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.koin:koin-gradle-plugin:$koin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -20,16 +68,5 @@ allprojects {
     }
 }
 
-def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
-}
-
-allprojects {
-    version = "1.0"
-
-    repositories {
-        mavenCentral()
-    }
-}
-
 apply plugin: 'android-reporting'
+apply plugin: 'koin'

@@ -23,16 +23,16 @@ package com.vk.sdk;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
+
+import androidx.fragment.app.Fragment;
 
 import com.vk.sdk.api.VKError;
 import com.vk.sdk.dialogs.VKCaptchaDialog;
@@ -107,7 +107,7 @@ public class VKServiceActivity extends Activity implements DialogInterface.OnDis
      * @param scopeList authorization
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    static void startLoginActivity(@NonNull android.support.v4.app.Fragment fr, ArrayList<String> scopeList) {
+    static void startLoginActivity(@NonNull Fragment fr, ArrayList<String> scopeList) {
         Intent intent = createIntent(fr.getActivity().getApplication(), VKServiceType.Authorization);
         intent.putStringArrayListExtra(KEY_SCOPE_LIST, scopeList);
         fr.startActivityForResult(intent, VKServiceType.Authorization.getOuterCode());

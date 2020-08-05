@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="tk.lorddarthart.vkauthtestapp.app.view.fragment.splash.SplashFragment"
+        android:label="splash_fragment"
+        tools:layout="@layout/splash_fragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_splashFragment_to_friendsListFragment"
+            app:destination="@id/friendsListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="tk.lorddarthart.vkauthtestapp.app.view.fragment.auth.AuthFragment"
+        android:label="AuthFragment" />
+    <fragment
+        android:id="@+id/friendsListFragment"
+        android:name="tk.lorddarthart.vkauthtestapp.app.view.fragment.friends_list.FriendsListFragment"
+        android:label="FriendsListFragment" />
+</navigation>
