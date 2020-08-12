@@ -3,12 +3,9 @@ package tk.lorddarthart.vkauthtestapp.app.view.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.vk.sdk.VKSdk
 import tk.lorddarthart.vkauthtestapp.R
-import tk.lorddarthart.vkauthtestapp.app.view.fragment.auth.AuthFragment
-import tk.lorddarthart.vkauthtestapp.app.view.fragment.friends_list.FriendsListFragment
-import tk.lorddarthart.vkauthtestapp.util.IOnBackPressable
-import tk.lorddarthart.vkauthtestapp.util.isOnBackPressable
+import tk.lorddarthart.vkauthtestapp.util.marker.IOnBackPressable
+import tk.lorddarthart.vkauthtestapp.util.helper.isOnBackPressable
 
 class MainActivity : AppCompatActivity() {
     val currentBaseFragment: Fragment?

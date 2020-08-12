@@ -7,7 +7,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import tk.lorddarthart.vkauthtestapp.R
 import tk.lorddarthart.vkauthtestapp.app.view.base.BaseFragment
 import tk.lorddarthart.vkauthtestapp.databinding.SplashFragmentBinding
-import tk.lorddarthart.vkauthtestapp.util.launchPostponed
+import tk.lorddarthart.vkauthtestapp.util.helper.launchPostponed
 
 class SplashFragment : BaseFragment() {
     override val fragmentViewModel: SplashViewModel by viewModel()

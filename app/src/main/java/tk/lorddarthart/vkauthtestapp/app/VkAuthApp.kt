@@ -7,9 +7,10 @@ import com.vk.sdk.VKAccessTokenTracker
 import com.vk.sdk.VKSdk
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import tk.lorddarthart.vkauthtestapp.app.model.authModule
-import tk.lorddarthart.vkauthtestapp.app.model.friendsListModule
-import tk.lorddarthart.vkauthtestapp.app.model.splashModule
+import tk.lorddarthart.vkauthtestapp.app.model.module.appDataModule
+import tk.lorddarthart.vkauthtestapp.app.model.module.authModule
+import tk.lorddarthart.vkauthtestapp.app.model.module.friendsListModule
+import tk.lorddarthart.vkauthtestapp.app.model.module.splashModule
 import tk.lorddarthart.vkauthtestapp.app.view.activity.MainActivity
 
 class VkAuthApp : Application() {
@@ -32,6 +33,7 @@ class VkAuthApp : Application() {
             androidContext(this@VkAuthApp)
             // modules
             modules(
+                    appDataModule,
                     splashModule,
                     authModule,
                     friendsListModule

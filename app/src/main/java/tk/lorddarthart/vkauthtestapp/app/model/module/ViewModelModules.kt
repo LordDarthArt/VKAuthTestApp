@@ -1,4 +1,4 @@
-package tk.lorddarthart.vkauthtestapp.app.model
+package tk.lorddarthart.vkauthtestapp.app.model.module
 
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
